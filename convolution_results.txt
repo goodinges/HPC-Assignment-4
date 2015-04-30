@@ -1,0 +1,76 @@
+Original Image used: IMAGE.ppm
+Question (a):
+	On opencl1: Cypress
+		Info for kernel convolution:
+		  CL_KERNEL_WORK_GROUP_SIZE=256
+		  CL_KERNEL_PREFERRED_WORK_GROUP_SIZE_MULTIPLE=64
+		  CL_KERNEL_LOCAL_MEM_SIZE=1936
+		  CL_KERNEL_PRIVATE_MEM_SIZE=0
+		0.001003 s
+		229.814199 MPixels/s
+		1.838514 GBit/s
+		11.120574 GFlop/s
+
+	On cuda3: Tesla T10 Processor
+		Info for kernel convolution:
+		  CL_KERNEL_WORK_GROUP_SIZE=512
+		  CL_KERNEL_PREFERRED_WORK_GROUP_SIZE_MULTIPLE=32
+		  CL_KERNEL_LOCAL_MEM_SIZE=52
+		  CL_KERNEL_PRIVATE_MEM_SIZE=0
+		0.000706 s
+		326.412084 MPixels/s
+		2.611297 GBit/s
+		15.794890 GFlop/s
+
+	on Cuda1: GeForce GTX 750 Ti
+		Info for kernel convolution:
+		  CL_KERNEL_WORK_GROUP_SIZE=1024
+		  CL_KERNEL_PREFERRED_WORK_GROUP_SIZE_MULTIPLE=32
+		  CL_KERNEL_LOCAL_MEM_SIZE=0
+		  CL_KERNEL_PRIVATE_MEM_SIZE=0
+		Work Group Size: 4x4:
+			0.000651 s
+			353.841244 MPixels/s
+			2.830730 GBit/s
+			17.122170 GFlop/s
+		Work Group Size: 8x8:
+			0.000269 s
+			857.765471 MPixels/s
+			6.862124 GBit/s
+			41.506769 GFlop/s
+		Work Group Size: 16x16:
+			0.000268 s
+			859.701268 MPixels/s
+			6.877610 GBit/s
+			41.600441 GFlop/s
+		Work Group Size: 20x20:
+			0.000279 s
+			826.809469 MPixels/s
+			6.614476 GBit/s
+			40.008826 GFlop/s
+		Work Group Size: 30x30:
+			0.000290 s
+			793.213562 MPixels/s
+			6.345708 GBit/s
+			38.383140 GFlop/s
+		Work Group Size: 32x32:
+			0.000268 s
+			859.250578 MPixels/s
+			6.874005 GBit/s
+			41.578632 GFlop/s
+
+	*Notes on using different group sizes:*
+		On cuda1 the recommended group size is multiple of 32.
+		As long as we keep it that way the performance remains
+		roughly the same. If the group size is bigger than 32
+		but not multiple of it the performance degrades a
+		little but if the size goes under 32 then the
+		performance goes down dramatically. Also The
+		performance is poorer if the group size is less than
+		32.
+
+
+Question (b):
+The result effect of different numeber of blurrings are in the repository by
+names: output_cl_1.ppm	output_cl_5.ppm output_cl_10.ppm output_cl_100.ppm
+output_cl_500.ppm
